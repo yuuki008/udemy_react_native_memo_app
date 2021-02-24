@@ -17,11 +17,11 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "jp.workabroad.native-memo-app",
-      "buildNumber": "1.0.o"
+      "bundleIdentifier": "jp.yuuki008.nativememo",
+      "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "jp.workabroad.native-memo-app",
+      "package": "jp.yuuki008.nativememo",
       "versionCode": 1,
       "permissions": [],
       "adaptiveIcon": {
