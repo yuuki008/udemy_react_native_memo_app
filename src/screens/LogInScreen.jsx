@@ -7,10 +7,12 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import firebase from "firebase";
+
 import Button from "../components/Button";
 import Loading from "../components/Loading";
 import { translateErrors } from "../utils";
-import CancelLogIn from "../components/CancelLogin";
+import CancelLogIn from "../components/CancelLogIn";
 
 export default function LogInScreen(props) {
   const { navigation } = props;
@@ -38,6 +40,9 @@ export default function LogInScreen(props) {
       .catch((error) => {
         const errorMsg = translateErrors(error.code);
         Alert.alert(errorMsg.title, errorMsg.description);
+      })
+      .then(() => {
+        setLoading(false);
       });
   }
 

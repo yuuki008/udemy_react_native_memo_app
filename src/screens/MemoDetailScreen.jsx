@@ -22,12 +22,13 @@ export default function MemoDetailScreen(props) {
         setMemo({
           id: doc.id,
           bodyText: data.bodyText,
-          updatedAt: data.updatedAt.toData(),
+          updatedAt: data.updatedAt.toDate(),
         });
       });
     }
     return unsubscribe;
   }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.memoHeader}>

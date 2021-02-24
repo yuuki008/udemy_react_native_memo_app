@@ -44,16 +44,21 @@ export default function MemoListScreen(props) {
             setLoading(false);
           }
         );
+        // ユーザーが存在したら会員登録ボタンかログアウトボタンを表示
+        // 会員登録ボタン：匿名ユーザー
+        // ログアウトボタン：メアド登録済ユーザー
         navigation.setOptions({
-          headerRight: () => {
-            <HeaderRightButton curretUser={user} cleanupFuncs={cleanupFuncs} />;
-          },
+          headerRight: () => (
+            <HeaderRightButton currentUser={user} cleanupFuncs={cleanupFuncs} />
+          ),
         });
       } else {
+        // 匿名ログイン（firebaseの Authentication > Sign-in method から有効にする必要があります）
         firebase
           .auth()
           .signInAnonymously()
           .catch(() => {
+            navigation.navigate("SignUp");
             Alert.alert("エラー", "アプリを再起動してください");
           })
           .then(() => {
@@ -66,6 +71,7 @@ export default function MemoListScreen(props) {
       cleanupFuncs.memos();
     };
   }, []);
+
   if (memos.length === 0) {
     return (
       <View style={emptyStyles.container}>

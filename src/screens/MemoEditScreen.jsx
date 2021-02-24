@@ -21,7 +21,7 @@ export default function MemoEditScreen(props) {
         .set(
           {
             bodyText: body,
-            updatedAt: new Data(),
+            updatedAt: new Date(),
           },
           { merge: true }
         )
@@ -29,11 +29,12 @@ export default function MemoEditScreen(props) {
           navigation.goBack();
         })
         .catch((error) => {
-          const errorMsg = translateErros(error.code);
-          Alert.alert(errorMsg, errorMsg.description);
+          const errorMsg = translateErrors(error.code);
+          Alert.alert(errorMsg.title, errorMsg.description);
         });
     }
   }
+
   return (
     <KeyboardSafeView style={styles.container}>
       <View style={styles.inputContainer}>

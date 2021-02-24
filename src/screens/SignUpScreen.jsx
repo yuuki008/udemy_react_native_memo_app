@@ -28,36 +28,41 @@ export default function SignUpScreen(props) {
 
   function handlePress() {
     setLoading(true);
-    const { currentUser } = firebase.auth();
-    if (!currentUser) {
-      return;
+    if (password === "" && email === "") {
+      Alert.alert("必須項目が未入力です！");
+      return false;
     }
-    const credential = firebase.auth.EmailAuthProvider.credential(
-      email,
-      password
-    );
-    currentUser
-      .linkWithCredential(credential)
-      .then(() => {
-        Alert.alert(
-          "登録完了",
-          "登録したメールアドレスとパスワードは大切に保管してください。",
-          [
-            {
-              text: "OK",
-              onPress: () => {
-                navigation.reset({ index: 0, routes: [{ name: "MemoList" }] });
-              },
-            },
-          ]
-        );
-      })
-      .catch((error) => {
-        const errorMsg = translateErros(error.code);
-        Alert.alert(errorMsg.title, errorMsg.description);
-      })
-      .then(() => {
-        setLoading(false);
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        const user = result.user;
+        if (user) {
+          const uid = user.uid;
+          const userData = {
+            uid: uid,
+            email: email,
+          };
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(uid)
+            .set(userData)
+            .then(() => {
+              console.log("ちんちん");
+              Alert.alert(
+                "登録完了",
+                "登録したメールアドレスとパスワードは大切に保管してください。"
+              );
+            })
+            .catch((error) => {
+              const errorMsg = translateErrors(error.code);
+              Alert.alert(errorMsg.title, errorMsg.description);
+            })
+            .then(() => {
+              setLoading(false);
+            });
+        }
       });
   }
 
