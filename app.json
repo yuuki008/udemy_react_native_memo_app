@@ -2,7 +2,7 @@
   "expo": {
     "name": "memo_app",
     "slug": "memo_app",
-    "version": "1.0.2",
+    "version": "1.0.0",
     "privacy": "unlisted",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,12 +17,12 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "jp.workabroad.memoapp2021",
-      "buildNumber": "1.0.2"
+      "bundleIdentifier": "jp.workabroad.native-memo-app",
+      "buildNumber": "1.0.o"
     },
     "android": {
-      "package": "jp.workabroad.memoapp2021",
-      "versionCode": 3,
+      "package": "jp.workabroad.native-memo-app",
+      "versionCode": 1,
       "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon_adaptive_foreground.png",
