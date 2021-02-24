@@ -24,7 +24,9 @@ export default function MemoListScreen(props) {
       if (user) {
         const db = firebase.firestore();
         const ref = db
-          .collection(`users/${user.uid}/memos`)
+          .collection("users")
+          .doc(user.uid)
+          .collection("memos")
           .orderBy("updatedAt", "desc");
         cleanupFuncs.memos = ref.onSnapshot(
           (snapshot) => {

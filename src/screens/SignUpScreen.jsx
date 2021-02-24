@@ -49,10 +49,20 @@ export default function SignUpScreen(props) {
             .doc(uid)
             .set(userData)
             .then(() => {
-              console.log("ちんちん");
               Alert.alert(
                 "登録完了",
-                "登録したメールアドレスとパスワードは大切に保管してください。"
+                "登録したメールアドレスとパスワードは大切に保管してください。",
+                [
+                  {
+                    text: "OK",
+                    onPress: () => {
+                      navigation.reset({
+                        index: 0,
+                        routes: [{ name: "MemoList" }],
+                      });
+                    },
+                  },
+                ]
               );
             })
             .catch((error) => {
